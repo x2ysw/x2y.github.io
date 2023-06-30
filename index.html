@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Picture Description</title>
+    <link href="/styles.css" rel="stylesheet"/>
+    <style>
+          body {
+
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+hr {
+  height: 3px;
+  background-color:blue
+
+}
+.established {
+  font-style: italic;
+}
+
+h1, h2, p {
+  text-align: center;
+}
+
+.menu {
+  width: 80%;
+  background-color: lightblue;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  max-width: 1000px;
+}
+
+h1, h2 {
+  font-family: Impact, serif;
+}
+
+.item p {
+  display: inline-block;
+}
+
+.flavor, .dessert {
+  text-align: left;
+  width: 75%;
+}
+
+.price {
+  text-align: right;
+  width: 25%
+}
+
+#myimg{
+        max-width: 100%;
+    max-height: 100%;
+        min-width: 100%;
+    min-height: 100%;
+    }
+.mybtn{
+    width:100px;
+    height:30px;
+    display:inline-block;
+    background-color:blue;
+    border:1px solid blue;
+    border-radius:3px;
+    color:white;
+    font-size:14px;
+    font-family:微软雅黑;
+    cursor:pointer;
+    text-align:center;
+    vertical-align: center;
+    box-shadow:0px 0px 1px 1px lightblue;
+    }
+
+
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <main>
+        <h1>PICTURE TO TEXT</h1>
+        <p class="established">Est. 2023</p>
+        <hr>
+
+        <section>
+            <h2>Picture</h2>
+            <p>Your picture will be shown below.</p>
+            <!--            图片选择按钮-->
+            <!--            <p><input type="file" accept="image/*"></p>-->
+            <div class="content">
+                <div id="div4bm" style="float:left;">
+                    <!--input[button] 触发 file click事件-->
+                    <input type="button" value="pic-choose" id="mybutton" class="mybtn" onclick="Id('file').click();"/>
+                    <!--file 隐藏起来  触发onchange事件-->
+                    <input type="file" name="file" accept="image/png,image/jpg,image/jpeg" id="file"
+                           onchange="changeToop();" style="display:none;"/>
+                </div>
+            </div>
+            <br><br>
+
+            <!--图片展示区域-->
+            <div class="content">
+                <!--设置默认图片-->
+                <img id="myimg"
+                     src="https://ts1.cn.mm.bing.net/th/id/R-C.d6a30a45444c70d0bc17288ae59566c7?rik=0dPTzou49a3FAw&riu=http%3a%2f%2fbpic.588ku.com%2felement_pic%2f00%2f72%2f80%2f6056def329a4d1f.jpg&ehk=BPhuF3Dpto%2brdZPaDwScdhgcvupCTY%2bRVlmCz9SniGE%3d&risl=&pid=ImgRaw&r=0"/>
+            </div>
+
+
+            <hr>
+
+            <h2>Description</h2>
+            <p>The description of this picture will be shown below.</p>
+            <input type="button" value="run" class="mybtn" />
+
+            <p style="color:gray">This is the sample of the description.</p>
+
+        </section>
+
+        <script type="text/javascript">
+
+from transformers var VisionEncoderDecoderModel, = require('VisionEncoderDecoderModel,');
+var torch = require('torch');
+from PIL var Image = require('Image');
+
+modelete = VisionEncoderDecoderModel.from_pretrained('nlpconnect/vit-gpt2-image-captioning');
+feature_extractor = ViTImageProcessor.from_pretrained('nlpconnect/vit-gpt2-image-captioning');
+tokenizer = AutoTokenizer.from_pretrained('nlpconnect/vit-gpt2-image-captioning');
+
+device = torch.device('cuda' if (torch.cuda.is_available() else 'cpu');
+model.to(device);
+
+
+
+max_length = 16;
+num_beams = 4;
+gen_kwargs = {'max_length': max_length, 'num_beams': num_beams};
+function predict_step(image_paths) {
+  images = [];
+  for (image_path in image_paths) {
+    i_image = Image.open(image_path);
+    if (i_image.mode != 'RGB') {
+      i_image = i_image.convert(mode='RGB');
+    }
+    images.push(i_image);
+  }
+  pixel_values = feature_extractor(images=images, return_tensors='pt').pixel_values;
+  pixel_values = pixel_values.to(device);
+}
+  output_ids = model.generate(pixel_values, **gen_kwargs);
+
+  preds = tokenizer.batch_decode(output_ids, skip_special_tokens=true);
+  preds = [pred.strip() for (pred in preds];
+  return preds;
+
+
+predict_step(['Snipaste_2023-05-20_23-26-50.png']) // ['a woman in a hospital bed with a woman in a hospital bed']
+
+
+        </script>
+
+
+    </main>
+    <hr>
+    <footer>
+        <p>from zjrunningGroup@2023</p>
+    </footer>
+
+    <script type="text/javascript">
+        //定义id选择器
+function Id(id){
+return document.getElementById(id);
+}
+function changeToop(){
+    var file = Id("file");
+    if(file.value==''){
+        //设置默认图片
+    Id("myimg").src='https://ts1.cn.mm.bing.net/th/id/R-C.d6a30a45444c70d0bc17288ae59566c7?rik=0dPTzou49a3FAw&riu=http%3a%2f%2fbpic.588ku.com%2felement_pic%2f00%2f72%2f80%2f6056def329a4d1f.jpg&ehk=BPhuF3Dpto%2brdZPaDwScdhgcvupCTY%2bRVlmCz9SniGE%3d&risl=&pid=ImgRaw&r=0';
+    }else{
+        preImg("file","myimg");
+    }
+}
+//获取input[file]图片的url Important
+function getFileUrl(fileId) {
+    var url;
+    var file = Id(fileId);
+    var agent = navigator.userAgent;
+    if (agent.indexOf("MSIE")>=1) {
+    url = file.value;
+    } else if(agent.indexOf("Firefox")>0) {
+    url = window.URL.createObjectURL(file.files.item(0));
+    } else if(agent.indexOf("Chrome")>0) {
+    url = window.URL.createObjectURL(file.files.item(0));
+    }
+    return url;
+}
+//读取图片后预览
+function preImg(fileId,imgId) {
+var imgPre =Id(imgId);
+imgPre.src = getFileUrl(fileId);
+}
+
+
+    </script>
+</div>
+</body>
+</html>
